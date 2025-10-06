@@ -636,7 +636,7 @@ AC_DEFUN([FLAGS_SETUP_CFLAGS_HELPER],
       ADLC_CXXFLAG="$CXXSTD_CXXFLAG"
     fi
 
-    if test "x$OPENJDK_TARGET_OS_ENV" != xbsd.freebsd; then
+    if test "x$OPENJDK_TARGET_OS" != xbsd; then
       TOOLCHAIN_CFLAGS_JVM="$TOOLCHAIN_CFLAGS_JVM -fvisibility=hidden"
     fi
 
