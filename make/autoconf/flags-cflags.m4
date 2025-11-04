@@ -572,7 +572,7 @@ AC_DEFUN([FLAGS_SETUP_CFLAGS_HELPER],
   if test "x$TOOLCHAIN_TYPE" = xgcc || test "x$TOOLCHAIN_TYPE" = xclang; then
     # COMMON to gcc and clang
     TOOLCHAIN_CFLAGS_JVM="-pipe -fno-rtti -fno-exceptions \
-        -fvisibility=hidden -fno-strict-aliasing -fno-omit-frame-pointer"
+        -fno-strict-aliasing -fno-omit-frame-pointer"
   fi
 
   if test "x$TOOLCHAIN_TYPE" = xclang && test "x$OPENJDK_TARGET_OS" = xaix; then
@@ -582,7 +582,7 @@ AC_DEFUN([FLAGS_SETUP_CFLAGS_HELPER],
   fi
 
   if test "x$TOOLCHAIN_TYPE" = xgcc; then
-    TOOLCHAIN_CFLAGS_JVM="$TOOLCHAIN_CFLAGS_JVM -fstack-protector"
+    TOOLCHAIN_CFLAGS_JVM="$TOOLCHAIN_CFLAGS_JVM -fvisibility=hidden -fstack-protector"
     TOOLCHAIN_CFLAGS_JDK="-pipe -fstack-protector"
     # reduce lib size on linux in link step, this needs also special compile flags
     # do this on s390x also for libjvm (where serviceability agent is not supported)
@@ -634,6 +634,10 @@ AC_DEFUN([FLAGS_SETUP_CFLAGS_HELPER],
       TOOLCHAIN_CFLAGS_JDK_CXXONLY="$CXXSTD_CXXFLAG"
       TOOLCHAIN_CFLAGS_JVM="$TOOLCHAIN_CFLAGS_JVM $CXXSTD_CXXFLAG"
       ADLC_CXXFLAG="$CXXSTD_CXXFLAG"
+    fi
+
+    if test "x$OPENJDK_TARGET_OS_ENV" != xbsd.freebsd; then
+      TOOLCHAIN_CFLAGS_JVM="$TOOLCHAIN_CFLAGS_JVM -fvisibility=hidden"
     fi
 
   elif test "x$TOOLCHAIN_TYPE" = xxlc; then
