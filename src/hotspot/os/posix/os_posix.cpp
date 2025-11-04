@@ -470,7 +470,7 @@ int os::vsnprintf(char* buf, size_t len, const char* fmt, va_list args) {
 }
 
 int os::get_fileno(FILE* fp) {
-#ifdef __OpenBSD__
+#if defined(__OpenBSD__) && OpenBSD <= 202507
   return fileno(fp);
 #else
   return NOT_AIX(::)fileno(fp);
