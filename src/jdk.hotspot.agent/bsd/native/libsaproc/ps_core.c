@@ -956,7 +956,6 @@ static bool read_shared_lib_info(struct ps_prochandle* ph) {
   uintptr_t addr = ph->core->dynamic_addr;
   uintptr_t debug_base;
   uintptr_t first_link_map_addr;
-  uintptr_t ld_base_addr;
   uintptr_t link_map_addr;
   uintptr_t lib_base_diff;
   uintptr_t lib_base;
